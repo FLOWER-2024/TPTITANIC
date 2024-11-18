@@ -1,0 +1,98 @@
+---
+title: "ANALYSE TITANIC"
+output: html_document
+date: "2024-11-18"
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#install.packages("carData")
+```
+
+```{r}
+library(carData)
+```
+
+```{r}
+df_TITANIC <- TitanicSurvival
+```
+
+
+```{r}
+print(df_TITANIC)
+```
+
+
+```{r}
+summary(df_TITANIC)
+```
+
+```{r}
+#install.packages("ggplot2")
+```
+
+```{r}
+library(ggplot2)
+```
+
+
+```{r}
+ggplot(df_TITANIC,aes(x=sex,fill=survived))+geom_bar(position="dodge")+facet_wrap(~passengerClass) +
+labs(title=" la répartition des survivants en fonction du sexe et la classe", 
+     x="sex",
+     y="nombre de passagers",
+     fill="survivants")+
+scale_y_continuous()+
+  theme_light()
+
+```
+
+
+Classe de billet (1re, 2e, 3e) :
+
+La classe de billet semble fortement liée au taux de survie.
+En 1ère classe, les femmes ont une bien meilleure chance de survie que les hommes.
+Cette tendance est également présente en 2ème classe, bien que moins marquée.
+En 3ème classe, la majorité des hommes n'ont pas survécu, et le nombre de femmes survivantes est aussi plus faible.
+Différence entre les sexes :
+
+Dans chaque classe, les femmes ont des taux de survie plus élevés que les hommes.
+En 3ème classe, on remarque un contraste net : la grande majorité des hommes n'ont pas survécu, alors qu'une proportion plus importante de femmes a survécu par rapport aux hommes, même si le nombre reste limité.
+Tendance générale :
+
+La survie est meilleure pour les passagers des classes supérieures (1re et 2e).
+Le taux de survie est plus faible en 3ème classe, avec une disparité encore plus marquée entre les sexes, où les femmes semblent priorisées.
+Le graphique montre que les femmes et les passagers des classes supérieures ont eu des taux de survie plus élevés. En 1re et 2e classe, les femmes survivent davantage que les hommes. En 3e classe, la plupart des hommes ne survivent pas, alors qu'une proportion plus élevée de femmes s'en sort. Cela suggère une priorité accordée aux femmes et aux passagers des classes supérieures dans les efforts de sauvetage.
+
+
+
+```{r}
+ggplot(df_TITANIC, aes(x =factor(survived), y = age)) +
+  geom_violin(trim=FALSE,fill="orange",color="darkblue")+
+  geom_boxplot(width=0.1,fill="white", color="black", outlier.shape= NA) +
+  labs(title="Représentationde l’age en fonction de la variable survived",
+       x = "Survivants (oui/non",
+       y = "Age")+
+  theme_minimal()+
+  theme(text=element_text(size=14))
+
+```
+
+Ce graphique en forme de violon montre la distribution de l'âge en fonction de la survie ("yes" pour les survivants et "no" pour les non-survivants). Voici une analyse concise :
+
+- Âge médian similaire : Les âges médians pour les survivants et non-survivants sont proches (autour de 25-30 ans).
+- Variabilité plus élevée chez les non-survivants : La distribution des âges est plus étendue pour les non-survivants, avec des âges allant de l'enfance à plus de 75 ans, tandis que celle des survivants est plus concentrée.
+- Enfants et jeunes adultes : La concentration de jeunes parmi les survivants suggère une priorité dans les efforts de sauvetage pour les passagers plus jeunes.
+
+
+Les jeunes avaient une probabilité de survie légèrement meilleure, tandis que la mortalité s'étendait sur une gamme d'âges plus large.
+
+
+
+
+
+
+
