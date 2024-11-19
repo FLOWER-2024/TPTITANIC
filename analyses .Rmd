@@ -91,6 +91,21 @@ Ce graphique en forme de violon montre la distribution de l'âge en fonction de 
 Les jeunes avaient une probabilité de survie légèrement meilleure, tandis que la mortalité s'étendait sur une gamme d'âges plus large.
 
 
+```{r}
+library(TitanicPackageWorkspace)
+```
+
+```{r}
+calculate_survival_by_gender <- function(data) {
+       aggregate(Survived ~ Sex, data = data, FUN = mean)
+   }
+```
+
+```{r}
+calculate_survival_by_class <- function(data) {
+       aggregate(Survived ~ Pclass, data = data, FUN = mean)
+   }
+```
 
 
 
